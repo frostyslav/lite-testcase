@@ -1,0 +1,23 @@
+// This jenkins plugin is required https://plugins.jenkins.io/docker-workflow/
+// Parts of the code are taken from https://medium.com/swlh/jenkins-pipeline-to-create-docker-image-and-push-to-docker-hub-721919512f2
+node {
+    def app
+    stage('Clone repository') {
+        checkout scm
+    }
+    stage('Build image') {
+        app = docker.build("frostyslav/litecoin")
+    }
+    stage('Security scan') {
+        sh "docker scan --accept-license --json frostyslav/litecoin | jq .summary"
+    }
+    stage('Push image') {
+        docker.withRegistry('https://registry.hub.docker.com', 'git') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+        }    
+    }
+    stage('Deployment') {
+        sh("helm upgrade --install --wait litecoind ./k8s/litecoind")
+    }
+}
