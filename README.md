@@ -47,3 +47,6 @@ bash ./scripts/list-security-warnings.sh
 ```
 python3 ./scripts/list-security-warnings.py --image litecoin:0.18.1
 ```
+
+6. Terraform configuration: terraform/
+Modules are taken from https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest
