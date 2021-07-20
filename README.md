@@ -32,14 +32,13 @@ Introduced changes:
 - Switch to fedora to fix vulnerabilities
 - Fix docker-entrypoint.sh
 
-
 2. Kubernetes chart was generated using `helm create` and updated to use statefulset
 
 3. Jenkinsfile is created in declarative style. Resources used:
 - Plugin https://plugins.jenkins.io/docker-workflow/
 - Parts of code https://medium.com/swlh/jenkins-pipeline-to-create-docker-image-and-push-to-docker-hub-721919512f2
 
-4. List security warnings (it is pointless to do it like this, but it is a text manipulation):
+4. List security warnings (it is pointless to do it like this, but it is a text manipulation problem):
 ```
 bash ./scripts/list-security-warnings.sh
 ```
